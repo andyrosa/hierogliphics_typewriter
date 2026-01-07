@@ -1,103 +1,4 @@
-// Hieroglyphic mappings for words
-const hieroglyphicMap = {
-    // Common words
-    'I': '𓀀',
-    'you': '𓎡',
-    'he': '𓀭',
-    'she': '𓁐',
-    'we': '𓏥',
-    'they': '𓏥',
-    'the': '𓅪',
-    'a': '𓄿',
-    'is': '𓇋𓅱',
-    'are': '𓃹',
-    'was': '𓃹',
-    'will': '𓆣',
-    'can': '𓌂',
-    'have': '𓎛',
-    'has': '𓎛',
-    'and': '𓎛',
-    'or': '𓇌',
-    'not': '𓂜',
-    'to': '𓂋',
-    'from': '𓅓',
-    'in': '𓅓',
-    'on': '𓁷',
-    'at': '𓂋',
-    'with': '𓎛',
-
-    // Names
-    'Cleopatra': '𓇌𓃭𓇋𓅱𓊪𓄿𓏏𓂋𓄿',
-    'Ramses': '𓂋𓄿𓅓𓋴𓋴',
-    'Nefertiti': '𓄤𓆑𓂋𓏏𓇋𓏏𓇋',
-    'Tutankhamun': '𓇋𓏏𓈖𓇳𓏺',
-    'Anubis': '𓇋𓈖𓊪𓅱',
-    'Ra': '𓂋𓄿',
-    'Osiris': '𓊨𓁹𓀭',
-    'Isis': '𓊨𓏏𓁐',
-    'Horus': '𓅃𓀭',
-    'Thoth': '𓅝𓎛𓅱𓏏𓏭',
-
-    // Actions
-    'walk': '𓂻',
-    'run': '𓃘',
-    'sit': '𓊨',
-    'stand': '𓊢',
-    'speak': '𓀁',
-    'listen': '𓄔',
-    'see': '𓁻',
-    'eat': '𓀁',
-    'drink': '𓀉',
-    'sleep': '𓁀',
-    'write': '𓏞',
-    'read': '𓏌',
-    'love': '𓌸',
-    'hate': '𓆜',
-    'give': '𓂞',
-    'take': '𓎁',
-    'build': '𓀯',
-    'destroy': '𓍌',
-    'create': '𓆣',
-    'think': '𓄣',
-
-    // Objects
-    'sun': '𓇳',
-    'moon': '𓇴',
-    'star': '𓇵',
-    'water': '𓈖',
-    'fire': '𓊖',
-    'earth': '𓊗',
-    'air': '𓊘',
-    'house': '𓉐',
-    'temple': '𓉗',
-    'pyramid': '𓉻',
-    'boat': '𓊝',
-    'bird': '𓅿',
-    'cat': '𓃠',
-    'dog': '𓃡',
-    'snake': '𓆓',
-    'eye': '𓁹',
-    'hand': '𓂝',
-    'heart': '𓄣',
-    'bread': '𓏏',
-    'beer': '𓏲',
-    'gold': '𓋞',
-    'silver': '𓋟',
-    'life': '𓋹',
-    'death': '𓋺',
-    'king': '𓇓',
-    'queen': '𓇔'
-};
-
-// Word categories
-const wordCategories = {
-    common: ['I', 'you', 'he', 'she', 'we', 'they', 'the', 'a', 'is', 'are', 'was', 'will', 'can', 'have', 'has', 'and', 'or', 'not', 'to', 'from', 'in', 'on', 'at', 'with'],
-    names: ['Cleopatra', 'Ramses', 'Nefertiti', 'Tutankhamun', 'Anubis', 'Ra', 'Osiris', 'Isis', 'Horus', 'Thoth'],
-    actions: ['walk', 'run', 'sit', 'stand', 'speak', 'listen', 'see', 'eat', 'drink', 'sleep', 'write', 'read', 'love', 'hate', 'give', 'take', 'build', 'destroy', 'create', 'think'],
-    objects: ['sun', 'moon', 'star', 'water', 'fire', 'earth', 'air', 'house', 'temple', 'pyramid', 'boat', 'bird', 'cat', 'dog', 'snake', 'eye', 'hand', 'heart', 'bread', 'beer', 'gold', 'silver', 'life', 'death', 'king', 'queen']
-};
-
-// State
+﻿// State
 let sentence = [];
 
 // DOM elements
@@ -106,27 +7,60 @@ const englishOutput = document.getElementById('english-output');
 const clearBtn = document.getElementById('clear-btn');
 const spaceBtn = document.getElementById('space-btn');
 const undoBtn = document.getElementById('undo-btn');
+const themeBtn = document.getElementById('theme-btn');
+
+// Theme state
+let isDesert = false;
+document.body.classList.add('theme-nile');
+
+themeBtn.addEventListener('click', () => {
+    isDesert = !isDesert;
+    if (isDesert) {
+        document.body.classList.remove('theme-nile');
+        document.body.classList.add('theme-desert');
+    } else {
+        document.body.classList.remove('theme-desert');
+        document.body.classList.add('theme-nile');
+    }
+});
+
+// Categories mapping to global data
+const categories = {
+    phrases: window.phrasesData || [],
+    nouns: window.nounsData || [],
+    names: window.namesData || [],
+    finisher: window.finisherData || []
+};
 
 // Initialize word palette
 function initializePalette() {
-    Object.keys(wordCategories).forEach(category => {
+    Object.keys(categories).forEach(category => {
         const container = document.getElementById(`${category}-words`);
-        wordCategories[category].forEach(word => {
+        if (!container) return;
+
+        categories[category].forEach(item => {
             const btn = document.createElement('button');
             btn.className = 'word-btn';
+
+            // Handle if item is just a string (fallback) or object
+            const english = cleanText(item.english || item);
+            const glyphs = item.glyphs || '';
+
             btn.innerHTML = `
-                <span class="hieroglyph">${hieroglyphicMap[word]}</span>
-                <span class="english">${word}</span>
+                <span class="hieroglyph">${glyphs}</span>
+                <span class="english">${english}</span>
             `;
-            btn.addEventListener('click', () => addWord(word));
+            btn.addEventListener('click', () => addWord(item));
             container.appendChild(btn);
         });
     });
 }
 
 // Add word to sentence
-function addWord(word) {
-    sentence.push(word);
+function addWord(item) {
+    // If item is just a string or space, wrap it? Use simple objects.
+    // We store the full item object in the sentence array.
+    sentence.push(item);
     updateDisplay();
     animateAddition();
 }
@@ -134,7 +68,7 @@ function addWord(word) {
 // Add space
 function addSpace() {
     if (sentence.length > 0) {
-        sentence.push(' ');
+        sentence.push({ english: ' ', glyphs: ' ', isSpace: true });
         updateDisplay();
     }
 }
@@ -155,15 +89,73 @@ function clearAll() {
 
 // Update display
 function updateDisplay() {
-    const hieroglyphicText = sentence.map(word => {
-        if (word === ' ') return ' ';
-        return hieroglyphicMap[word] || word;
-    }).join('');
+    hieroglyphicOutput.innerHTML = '';
 
-    const englishText = sentence.join(' ').replace(/\s+/g, ' ').trim();
+    sentence.forEach((item) => {
+        if (item.isSpace) {
+            // Space is a visual gap
+            const spacer = document.createElement('div');
+            spacer.style.width = '20px';
+            hieroglyphicOutput.appendChild(spacer);
+            return;
+        }
 
-    hieroglyphicOutput.textContent = hieroglyphicText;
-    englishOutput.textContent = englishText || 'Click words to compose sentences';
+        const glyphsStr = item.glyphs || '';
+        const englishStr = item.english || '';
+
+        // Split by code point (important for surrogate pairs like emojis/hieroglyphs)
+        const glyphs = [...glyphsStr];
+
+        const wordContainer = document.createElement('div');
+        wordContainer.className = 'quadrat-word';
+        wordContainer.title = cleanText(englishStr); // Tooltip for English meaning
+
+        // Pack into quadrats
+        let i = 0;
+        // If no glyphs, maybe show placeholder? But assuming data is good.
+        if (glyphs.length === 0) return;
+
+        while (i < glyphs.length) {
+            const remaining = glyphs.length - i;
+            let take = 1;
+            let layoutClass = 'layout-1';
+
+            if (remaining >= 4) {
+                take = 4;
+                layoutClass = 'layout-4';
+            } else if (remaining === 3) {
+                take = 3;
+                // Alternate between left-big and top-big for variety, but deterministically based on index
+                layoutClass = (i % 2 === 0) ? 'layout-3-left' : 'layout-3-top';
+            } else if (remaining === 2) {
+                take = 2;
+                layoutClass = 'layout-2-v';
+            } else {
+                take = 1;
+                layoutClass = 'layout-1';
+            }
+
+            const quadrat = document.createElement('div');
+            quadrat.className = `quadrat ${layoutClass}`;
+
+            for (let j = 0; j < take; j++) {
+                const glyphItem = document.createElement('div');
+                glyphItem.className = 'hieroglyph-item';
+                const span = document.createElement('span');
+                span.textContent = glyphs[i + j];
+                glyphItem.appendChild(span);
+                quadrat.appendChild(glyphItem);
+            }
+
+            wordContainer.appendChild(quadrat);
+            i += take;
+        }
+
+        hieroglyphicOutput.appendChild(wordContainer);
+    });
+
+    const englishText = sentence.map(item => cleanText(item.english)).join(' ').replace(/\s+/g, ' ').trim();
+    englishOutput.textContent = englishText || 'Etch away';
 }
 
 // Animate addition
@@ -183,3 +175,16 @@ undoBtn.addEventListener('click', undo);
 hieroglyphicOutput.style.transition = 'transform 0.2s ease';
 initializePalette();
 updateDisplay();
+
+// Helper to remove parentheticals, ellipses, and extra definitions
+function cleanText(text) {
+    if (!text) return '';
+    let cleaned = text;
+    // Remove parentheticals
+    cleaned = cleaned.replace(/\s*\(.*?\)/g, '');
+    // Remove anything after a slash
+    cleaned = cleaned.split('/')[0];
+    // Remove leading ellipsis
+    cleaned = cleaned.replace(/^\s*\u2026\s*/, '').replace(/^\s*\.\.\.\s*/, '');
+    return cleaned.trim();
+}

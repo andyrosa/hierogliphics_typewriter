@@ -1,16 +1,94 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+Egyptian+Hieroglyphs&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+Egyptian+Hieroglyphs&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+:root {
+    /* Base Variables (Defaults) */
+    --font-main: 'Cinzel', serif;
+    --font-glyphs: 'Noto Sans Egyptian Hieroglyphs', sans-serif;
+}
+
+/* Desert Theme (Default) */
+.theme-desert {
+    --bg-gradient: linear-gradient(135deg, #d4a574 0%, #c9a26e 50%, #b8956a 100%);
+    --text-primary: #4a3728;
+    --text-secondary: #4e342e;
+    --text-accent: #8b5a2b;
+    --text-shadow: rgba(139, 90, 43, 0.3);
+
+    --panel-bg: rgba(222, 184, 135, 0.5);
+    --panel-border: rgba(139, 90, 43, 0.4);
+    --panel-shadow: rgba(101, 67, 33, 0.3);
+
+    --header-bg: rgba(218, 165, 105, 0.3);
+
+    --btn-bg: linear-gradient(135deg, #cd853f 0%, #b8860b 100%);
+    --btn-hover: linear-gradient(135deg, #daa520 0%, #cd853f 100%);
+    --btn-text: #2b1b0e;
+
+    --word-btn-bg: rgba(210, 180, 140, 0.6);
+    --word-btn-border: rgba(139, 90, 43, 0.5);
+    --word-btn-hover: rgba(218, 165, 32, 0.4);
+    --word-glyph-color: #8b4513;
+
+    --quadrat-bg: rgba(139, 90, 43, 0.08);
+    --quadrat-text: #2a1a0e;
+
+    --decoration-color: rgba(218, 165, 32, 0.3);
+}
+
+/* Nile Theme (Blueish) */
+.theme-nile {
+    /* Lapis Lazuli to Turquoise Gradient */
+    --bg-gradient: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    /* Deep Mystical Blue */
+    --bg-gradient: linear-gradient(135deg, #1A2980 0%, #26D0CE 100%);
+    /* Brighter Nile */
+
+    --text-primary: #e0f7fa;
+    /* Light cyan text */
+    --text-secondary: #b2ebf2;
+    --text-accent: #FFD700;
+    /* Gold */
+    --text-shadow: rgba(0, 0, 0, 0.5);
+
+    --panel-bg: rgba(0, 40, 60, 0.4);
+    /* Dark blue glass */
+    --panel-border: rgba(38, 208, 206, 0.3);
+    /* Turquoise border */
+    --panel-shadow: rgba(0, 0, 0, 0.4);
+
+    --header-bg: rgba(26, 41, 128, 0.3);
+
+    --btn-bg: linear-gradient(135deg, #D4AF37 0%, #C5A028 100%);
+    /* Gold buttons */
+    --btn-hover: linear-gradient(135deg, #FDC830 0%, #F37335 100%);
+    --btn-text: #2f1d03;
+    /* Dark brown on gold */
+
+    --word-btn-bg: rgba(38, 208, 206, 0.15);
+    --word-btn-border: rgba(38, 208, 206, 0.4);
+    --word-btn-hover: rgba(255, 215, 0, 0.25);
+    /* Gold hover */
+    --word-glyph-color: #FFD700;
+    /* Gold Glyphs */
+
+    --quadrat-bg: rgba(255, 255, 255, 0.1);
+    --quadrat-text: #ffffff;
+
+    --decoration-color: rgba(38, 208, 206, 0.3);
 }
 
 body {
-    font-family: 'Cinzel', serif;
-    background: linear-gradient(135deg, #d4a574 0%, #c9a26e 50%, #b8956a 100%);
+    font-family: var(--font-main);
+    background: var(--bg-gradient);
     min-height: 100vh;
-    color: #4a3728;
+    color: var(--text-primary);
     padding: 10px;
 }
 
@@ -23,33 +101,31 @@ header {
     text-align: center;
     margin-bottom: 8px;
     padding: 10px;
-    background: rgba(218, 165, 105, 0.3);
+    background: var(--header-bg);
     border-radius: 12px;
-    border: 2px solid rgba(139, 90, 43, 0.4);
+    border: 2px solid var(--panel-border);
     backdrop-filter: blur(10px);
 }
 
 h1 {
     font-size: 2rem;
     font-weight: 700;
-    color: #8b5a2b;
-    text-shadow: 0 0 20px rgba(139, 90, 43, 0.3);
+    color: var(--text-accent);
+    text-shadow: 0 0 20px var(--text-shadow);
     margin-bottom: 5px;
     letter-spacing: 2px;
 }
-
-
 
 /* Main Display Area (Text + Controls) */
 .main-display-area {
     display: flex;
     gap: 10px;
-    background: rgba(222, 184, 135, 0.5);
+    background: var(--panel-bg);
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 8px;
-    border: 2px solid rgba(139, 90, 43, 0.5);
-    box-shadow: 0 10px 40px rgba(101, 67, 33, 0.3);
+    border: 2px solid var(--panel-border);
+    box-shadow: 0 10px 40px var(--panel-shadow);
     backdrop-filter: blur(10px);
     min-height: 90px;
     align-items: stretch;
@@ -63,26 +139,22 @@ h1 {
 }
 
 .hieroglyphic-display {
-    font-family: 'Noto Sans Egyptian Hieroglyphs', sans-serif;
-    font-size: 2.2rem;
-    /* Increased size */
-    line-height: 1.2;
-    color: #2a1a0e;
-    /* Much darker for better visibility */
-    text-align: center;
-    margin-bottom: 4px;
-    min-height: 45px;
-    padding: 5px;
-    word-wrap: break-word;
-    /* Removed text-shadow or made it very subtle definition */
-    text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
-    font-weight: 600;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    gap: 15px;
+    /* Space between words */
+    min-height: 80px;
+    padding: 10px;
+    font-family: var(--font-glyphs);
+    color: var(--quadrat-text);
 }
 
 .english-display {
     font-size: 1.1rem;
-    color: #4e342e;
-    /* Darker brown */
+    color: var(--text-secondary);
     text-align: center;
     min-height: 25px;
     font-weight: 600;
@@ -95,17 +167,17 @@ h1 {
     gap: 6px;
     justify-content: center;
     min-width: 80px;
-    border-left: 1px solid rgba(139, 90, 43, 0.3);
+    border-left: 1px solid var(--panel-border);
     padding-left: 10px;
 }
 
 .control-btn {
     padding: 8px 10px;
-    font-family: 'Cinzel', serif;
+    font-family: var(--font-main);
     font-size: 0.8rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #cd853f 0%, #b8860b 100%);
-    color: #2b1b0e;
+    background: var(--btn-bg);
+    color: var(--btn-text);
     border: 1px solid rgba(62, 39, 35, 0.2);
     border-radius: 8px;
     cursor: pointer;
@@ -116,7 +188,7 @@ h1 {
 
 .control-btn:hover {
     transform: translateX(-2px);
-    background: linear-gradient(135deg, #daa520 0%, #cd853f 100%);
+    background: var(--btn-hover);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -131,16 +203,16 @@ h1 {
 }
 
 .palette-section {
-    background: rgba(222, 184, 135, 0.3);
+    background: var(--panel-bg);
     padding: 8px;
     border-radius: 10px;
-    border: 2px solid rgba(139, 90, 43, 0.4);
+    border: 2px solid var(--panel-border);
     backdrop-filter: blur(10px);
 }
 
 .palette-section h3 {
     font-size: 0.9rem;
-    color: #8b5a2b;
+    color: var(--text-accent);
     margin-bottom: 6px;
     text-align: center;
     font-weight: 600;
@@ -155,11 +227,11 @@ h1 {
 
 .word-btn {
     padding: 6px 8px;
-    font-family: 'Cinzel', serif;
+    font-family: var(--font-main);
     font-size: 0.7rem;
-    background: rgba(210, 180, 140, 0.6);
-    color: #4a3728;
-    border: 2px solid rgba(139, 90, 43, 0.5);
+    background: var(--word-btn-bg);
+    color: var(--text-primary);
+    border: 2px solid var(--word-btn-border);
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -175,17 +247,17 @@ h1 {
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: rgba(218, 165, 32, 0.3);
+    background: var(--decoration-color);
     transform: translate(-50%, -50%);
     transition: width 0.4s, height 0.4s;
 }
 
 .word-btn:hover {
-    background: rgba(218, 165, 32, 0.4);
-    border-color: #8b5a2b;
-    color: #3e2723;
+    background: var(--word-btn-hover);
+    border-color: var(--text-accent);
+    color: var(--text-primary);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(139, 90, 43, 0.4);
+    box-shadow: 0 5px 15px var(--panel-shadow);
 }
 
 .word-btn:hover::before {
@@ -199,10 +271,10 @@ h1 {
 
 .word-btn .hieroglyph {
     display: block;
-    font-family: 'Noto Sans Egyptian Hieroglyphs', sans-serif;
+    font-family: var(--font-glyphs);
     font-size: 1.2rem;
     margin-bottom: 3px;
-    color: #8b4513;
+    color: var(--word-glyph-color);
 }
 
 .word-btn .english {
@@ -231,4 +303,135 @@ h1 {
     .word-btn .hieroglyph {
         font-size: 1.5rem;
     }
+}
+
+/* Quadrat Rendering Styles */
+.quadrat-word {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.quadrat {
+    display: grid;
+    width: 3.5rem;
+    height: 3.5rem;
+    background: var(--quadrat-bg);
+    border-radius: 4px;
+    padding: 2px;
+    transition: transform 0.2s;
+}
+
+.quadrat:hover {
+    transform: scale(1.05);
+    background: var(--word-btn-hover);
+}
+
+.hieroglyph-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    line-height: 1;
+}
+
+.hieroglyph-item span {
+    display: block;
+    font-family: 'Noto Sans Egyptian Hieroglyphs', sans-serif;
+    line-height: 1;
+}
+
+/* Layouts */
+/* 1 item */
+.layout-1 {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+.layout-1 .hieroglyph-item span {
+    font-size: 2.5rem;
+}
+
+/* 2 items vertical */
+.layout-2-v {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.layout-2-v .hieroglyph-item span {
+    font-size: 1.6rem;
+}
+
+/* 3 items: Left Big */
+.layout-3-left {
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.layout-3-left> :nth-child(1) {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+}
+
+.layout-3-left> :nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.layout-3-left> :nth-child(3) {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.layout-3-left .hieroglyph-item:nth-child(1) span {
+    font-size: 2rem;
+}
+
+.layout-3-left .hieroglyph-item:not(:nth-child(1)) span {
+    font-size: 1.2rem;
+}
+
+/* 3 items: Top Big */
+.layout-3-top {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1.2fr 1fr;
+}
+
+.layout-3-top> :nth-child(1) {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+}
+
+.layout-3-top> :nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.layout-3-top> :nth-child(3) {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.layout-3-top .hieroglyph-item:nth-child(1) span {
+    font-size: 2rem;
+}
+
+.layout-3-top .hieroglyph-item:not(:nth-child(1)) span {
+    font-size: 1.2rem;
+}
+
+/* 4 items: 2x2 */
+.layout-4 {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.layout-4 .hieroglyph-item span {
+    font-size: 1.3rem;
+}
+
+.title-glyph {
+    font-family: 'Noto Sans Egyptian Hieroglyphs', sans-serif;
+    font-weight: 400;
 }

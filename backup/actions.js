@@ -1,0 +1,22 @@
+[
+  { "english": "walk", "glyphs": "𓂻", "transliteration": "" },
+  { "english": "run", "glyphs": "𓃘", "transliteration": "" },
+  { "english": "sit", "glyphs": "𓊨", "transliteration": "" },
+  { "english": "stand", "glyphs": "𓊢", "transliteration": "" },
+  { "english": "speak", "glyphs": "𓀁", "transliteration": "" },
+  { "english": "listen", "glyphs": "𓄔", "transliteration": "" },
+  { "english": "see", "glyphs": "𓁻", "transliteration": "" },
+  { "english": "eat", "glyphs": "𓀁", "transliteration": "" },
+  { "english": "drink", "glyphs": "𓀉", "transliteration": "" },
+  { "english": "sleep", "glyphs": "𓁀", "transliteration": "" },
+  { "english": "write", "glyphs": "𓏞", "transliteration": "" },
+  { "english": "read", "glyphs": "𓏌", "transliteration": "" },
+  { "english": "love", "glyphs": "𓌸", "transliteration": "" },
+  { "english": "hate", "glyphs": "𓆜", "transliteration": "" },
+  { "english": "give", "glyphs": "𓂞", "transliteration": "" },
+  { "english": "take", "glyphs": "𓎁", "transliteration": "" },
+  { "english": "build", "glyphs": "𓀯", "transliteration": "" },
+  { "english": "destroy", "glyphs": "𓍌", "transliteration": "" },
+  { "english": "create", "glyphs": "𓆣", "transliteration": "" },
+  { "english": "think", "glyphs": "𓄣", "transliteration": "" }
+]
