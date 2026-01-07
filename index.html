@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hieroglyphics Typewriter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>𓂀 Hieroglyphics Typewriter 𓂀</h1>
+    </header>
+
+    <div class="main-display-area">
+      <div class="output-content">
+        <div id="hieroglyphic-output" class="hieroglyphic-display"></div>
+        <div id="english-output" class="english-display"></div>
+      </div>
+
+      <div class="controls-sidebar">
+        <button id="clear-btn" class="control-btn" title="Clear All">Clear</button>
+        <button id="space-btn" class="control-btn" title="Add Space">Space</button>
+        <button id="undo-btn" class="control-btn" title="Undo Last">Undo</button>
+      </div>
+    </div>
+
+    <div class="word-palette">
+      <div class="palette-section">
+        <h3>Common Words</h3>
+        <div class="word-grid" id="common-words"></div>
+      </div>
+
+      <div class="palette-section">
+        <h3>Names</h3>
+        <div class="word-grid" id="names-words"></div>
+      </div>
+
+      <div class="palette-section">
+        <h3>Actions</h3>
+        <div class="word-grid" id="actions-words"></div>
+      </div>
+
+      <div class="palette-section">
+        <h3>Objects</h3>
+        <div class="word-grid" id="objects-words"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
