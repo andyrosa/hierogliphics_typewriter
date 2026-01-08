@@ -51,11 +51,18 @@
     </div>
   </div>
 
-  <script src="phrases.js"></script>
-  <script src="nouns.js"></script>
-  <script src="names.js"></script>
-  <script src="finisher.js"></script>
-  <script src="script.js"></script>
+  <script>
+    (function () {
+      const v = Date.now();
+      const scripts = ['phrases.js', 'nouns.js', 'names.js', 'finisher.js', 'script.js'];
+      scripts.forEach(src => {
+        const s = document.createElement('script');
+        s.src = `${src}?v=${v}`;
+        s.async = false;
+        document.body.appendChild(s);
+      });
+    })();
+  </script>
 </body>
 
 </html>
