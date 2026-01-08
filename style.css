@@ -283,25 +283,50 @@ h1 {
     opacity: 0.9;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .main-display-area {
+        flex-direction: column;
+    }
+
+    .controls-sidebar {
+        flex-direction: row;
+        border-left: none;
+        border-top: 1px solid var(--panel-border);
+        padding-left: 0;
+        padding-top: 10px;
+        min-width: auto;
+    }
+
+    .word-palette {
+        grid-template-columns: 1fr;
+        /* Stack columns correctly */
     }
 
     .hieroglyphic-display {
         font-size: 2rem;
+        min-height: 60px;
     }
 
     .word-grid {
-        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
     }
 
     .word-btn {
-        padding: 12px 15px;
+        padding: 8px 10px;
+        font-size: 0.65rem;
     }
 
     .word-btn .hieroglyph {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
+    }
+
+    .hieroglyph-item span {
+        font-size: 80%;
+        /* Scale down glyphs slightly in output */
     }
 }
 
